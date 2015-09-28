@@ -18,9 +18,15 @@ void insertion (int *inteiros, int tamanho)
          }
       }
     }
+void troca (int* inteiros, int pos, int esq) // troca dois elementos de posição
+{
+int aux = *(inteiros + esq);
+*(inteiros + esq) = *(inteiros + pos);
+*(inteiros + pos) = aux;
+}
 int dividir (int *inteiros, int esq, int dir) // esta função coloca o pivô do vetor em sua posição correta
 {
-    int aux, i = esq + 1, j = dir; // esq é o elemento tomado com pivô e dir é o último elemento do vetor
+    int i = esq + 1, j = dir; // esq é o elemento tomado com pivô e dir é o último elemento do vetor
     while(i <= j) // este ciclo percorre todo o vetor até encontrar a posição correta do pivô
     {
         if(*(inteiros + i) < *(inteiros + esq) || *(inteiros + i) == *(inteiros + esq))
@@ -29,15 +35,11 @@ int dividir (int *inteiros, int esq, int dir) // esta função coloca o pivô do ve
             j--;
         if(j<i)
             break;
-        aux = *(inteiros + j);
-        *(inteiros + j) = *(inteiros + i);
-        *(inteiros + i) = aux;
+        troca(inteiros, i, j);
     }
     if (j >= 0) // esta parte coloca o pivô em sua posição correta e retorna a posição
  {
-    aux = *(inteiros + j);
-    *(inteiros + j) = *(inteiros + esq);
-    *(inteiros + esq) = aux;
+    troca(inteiros, j, esq);
     return j;
 }
 
@@ -45,12 +47,14 @@ int dividir (int *inteiros, int esq, int dir) // esta função coloca o pivô do ve
 void quicksort (int *inteiros, int esq, int dir) // esta função ordena um vetor de inteiros em ordem crescente
 {
     if(esq<dir){ //esta parte checa se as posição recebidas como argumento fazem sentido
+    int pos = rand() % (dir - esq + 1) + esq;
+    troca(inteiros, pos, esq);
     int pos_pivo = dividir(inteiros,esq,dir);
     quicksort(inteiros,esq,pos_pivo -1); // recursão da função quicksort
     quicksort(inteiros,pos_pivo +1,dir);}
 }
 
-void mais_repete(int *inteiros, int n)
+void mais_repete(int *inteiros, int n) // checa qual o elemento que mais repete em um vetor
 {
     if (n > 8 && n != 1) // entre as linhas 53 e 56 é checado qual o melhor algortimo de ordenação baseado no tamanho do vetor
     quicksort(inteiros,0, n-1);
@@ -61,10 +65,10 @@ void mais_repete(int *inteiros, int n)
         insertion(inteiros, n);
     int cont1 = 1, cont2, cont3 = 1, i = 1, j = 0;
     printf("\nOs elementos que mais repetem sao:\n");
-    while(j < 1)
+    while(j < 1) // condição de parada da função
     {
 
-    while(i < n)
+    while(i < n) // este ciclo checa qual o maior número de vezes que um elemento se repete
     {
         while(*(inteiros + i) > *(inteiros + i - 1))
             {
@@ -83,7 +87,7 @@ void mais_repete(int *inteiros, int n)
     }
 
     i = 1;
-    while(i < n)
+    while(i < n) //este ciclo analisa qual ou quais elementos se repentem o número de vezes encontrado no ciclo anterior
     {
         while (*(inteiros + i) == *(inteiros + i - 1))
         {
@@ -100,7 +104,7 @@ void mais_repete(int *inteiros, int n)
     }
     if(cont3 == 1)
         printf("%i\n", *(inteiros + i - 1));
-    j = 1;
+    j = 1; // para a função
     }
 }
 
