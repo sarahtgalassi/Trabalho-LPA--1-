@@ -2,7 +2,7 @@ Trabalho de Linguagens de Programação e Aplicações - SCC300
 Professor: Adenilso Simão
 
 Alunos: Sarah Tatsuta Galassi 	 	9311650		sarahtgalassi
-	Fábio Assis de Campos Junior    9312761		
+	Fábio Assis de Campos Junior    9312761		fabioassisjr
 
 1) Informações gerais
 Linguagem utilizada: C (.c)
